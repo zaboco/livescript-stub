@@ -1,7 +1,7 @@
 {
-  "name": "dummy",
+  "name": "livescript-stub",
   "version": "0.0.1",
-  "description": "dummy module",
+  "description": "livescript-stub module",
   "dependencies": {
     "prelude-ls": "~1.0.0"
   },
