@@ -1,21 +1,22 @@
+BIN = ./node_modules/.bin
+COMPILE = $(BIN)/lsc
+WATCH = $(BIN)/wr
+TEST = $(BIN)/jasmine-node
 
 test-wr:
-	@wr --exec 'make -s test' src spec
+	@$(WATCH) --exec 'make -s test' src spec
 
 build:
-	@lsc -bco lib src spec
+	@$(COMPILE) -bco lib src spec
 
 build-w:
-	@lsc -wbco lib src spec
+	@$(COMPILE) -wbco lib src spec
 
 test: build
-	@jasmine-node --noStack lib
+	@$(TEST) --noStack lib
 
 test-w: build
-	@jasmine-node --autotest --noStack lib
+	@$(TEST) --autotest --noStack lib
 
 clean:
 	@rm -rf lib/\*-spec.js
-
-install:
-	@./install.sh

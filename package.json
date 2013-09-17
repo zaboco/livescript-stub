@@ -5,7 +5,11 @@
   "dependencies": {
     "prelude-ls": "~1.0.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "LiveScript": "*",
+    "jasmine-node": "*",
+    "wr": "*"
+  },
   "scripts": {
     "test": "make test"
   },
