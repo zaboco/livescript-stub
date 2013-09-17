@@ -1,4 +1,4 @@
-require! '../src/dummy'
+require! './dummy'
 
 that = it
 
