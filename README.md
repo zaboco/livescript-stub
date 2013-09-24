@@ -3,7 +3,7 @@
 
 livescript project skeleton
 
-```
-npm install
-grunt --help
+```sh
+$ npm install
+$ grunt --help
 ```
