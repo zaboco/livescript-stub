@@ -17,7 +17,8 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "grunt test",
-    "prepublish": "grunt dist"
+    "prepublish": "grunt dist",
+    "preinstall": "npm install -g grunt-cli"
   },
   "repository": {
     "type": "git",
