@@ -1,7 +1,14 @@
-require! './dummy'
+require! {
+  '../src/dummy'
+  'vows/lib/vows/reporters/spec'
+  \vows
+  \assert
+}
 
-that = it
-
-describe \dummy ->
-  that \works ->
-    expect dummy.dummy-method! .to-equal true
+vows.describe \suite
+  .add-batch {
+    \dummy-method :
+      topic: dummy.dummy-method
+      'returns true': -> assert.ok it
+  }
+  .export module, reporter: spec
