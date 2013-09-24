@@ -4,6 +4,6 @@
 livescript project skeleton
 
 ```
-make install
-make
+npm install
+grunt --help
 ```
