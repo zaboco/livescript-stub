@@ -36,7 +36,8 @@ module.exports = function(grunt) {
     vows: {
       options: {
         reporter: "spec",
-        executable: "vows"
+        executable: "vows",
+        silent: true
       },
       all: {
         src: "spec/*.js"
