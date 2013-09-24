@@ -58,7 +58,7 @@ module.exports = function(grunt) {
     });
   });
 
-  grunt.task.registerTask('dist', ['clean:lib', 'livescript:src', 'copy:lib', 'clean:spec']);
+  grunt.task.registerTask('dist', ['clean:lib', 'test', 'livescript:src', 'copy:lib', 'clean:spec']);
   grunt.task.registerTask('test', ['clean:spec', 'livescript', 'vows', 'clean:spec']);
   grunt.task.registerTask('default', ['dist']);
 }
