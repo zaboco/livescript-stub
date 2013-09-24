@@ -4,7 +4,7 @@
     {
       "path": ".",
       "folder_exclude_patterns": ["node_modules", "lib"],
-      "file_exclude_patterns": ["*.sublime-workspace", "*-spec.js"]
+      "file_exclude_patterns": ["*.sublime-workspace", "src/*.js", "spec/*.js"]
     }
   ]
 }
