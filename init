@@ -6,7 +6,7 @@ then
   exit 1
 fi
 
-DEST=$1
+DEST=${1%/}
 
 NAME="${DEST#*/}"
 
