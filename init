@@ -1,0 +1,40 @@
+#!/bin/bash
+
+if [ $# -ne 1 ]
+then
+  echo 'Must supply destination project path!'
+  exit 1
+fi
+
+DEST=$1
+
+echo "Installing new module at '$DEST'. Are you sure? (y/n)"
+read ANSWER
+[ "$ANSWER" != 'y' ] && exit 0
+
+NAME="${DEST#*/}"
+
+files=(
+  src/ spec/
+  .gitignore .npmignore .travis.yml
+  Gruntfile.js
+  package.json
+  README.md
+)
+
+echo "creating $DEST"
+rm -rf $DEST
+mkdir -p $DEST
+
+echo "copying folder to $DEST"
+cp -r "${files[@]}" $DEST
+
+echo "creating sublime project: $DEST/$NAME.sublime-project"
+cp *.sublime-project $DEST/$NAME.sublime-project
+cd $DEST
+sed -i "s/livescript-stub/$NAME/g" *.json *.md
+
+echo "installing module"
+npm install
+
+echo done
