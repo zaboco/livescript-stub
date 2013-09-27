@@ -14,8 +14,7 @@
     "grunt-verbosity": "~0.2.2",
     "mocha": "~1.13.0",
     "grunt-mocha-test": "~0.7.0",
-    "expect.js": "~0.2.0",
-    "LiveScript": "~1.2.0"
+    "expect.js": "~0.2.0"
   },
   "main": "lib/index.js",
   "scripts": {

@@ -24,7 +24,7 @@ module.exports = function(grunt) {
     mochaTest: {
       options: {
         reporter: "spec",
-        require: "livescript"
+        require: "grunt-livescript/node_modules/dslivescript"
       },
       test: {
         src: "spec/*.ls"
@@ -54,7 +54,7 @@ module.exports = function(grunt) {
     grunt.log.ok('________________________________________');
     grunt.util.spawn({
       cmd: 'mocha',
-      args: ['--compilers', 'ls:LiveScript', '-R', 'min', specPath],
+      args: ['--compilers', 'ls:grunt-livescript/node_modules/dslivescript', '-R', 'min', specPath],
       opts: {stdio: 'inherit'}
     }, function done() {
       grunt.log.ok('========================================');
