@@ -47,7 +47,7 @@ module.exports = function(grunt) {
       all: {
         files: [{
           expand: true,
-          src: ['**/*', '!node_modules/**/*', '!tmp/**/*'],
+          src: ['**/*', '.*', '!node_modules/**/*', '!tmp/**/*'],
           filter: 'isFile',
           dest: '.'
         }]
