@@ -7,14 +7,15 @@
   },
   "devDependencies": {
     "grunt": "~0.4.1",
-    "vows": "~0.7.0",
     "grunt-contrib-watch": "~0.5.3",
     "grunt-livescript": "~0.5.0",
     "grunt-contrib-clean": "~0.5.0",
-    "grunt-contrib-copy": "~0.4.1",
-    "grunt-vows": "~0.4.0",
     "grunt-lineending": "~0.2.1",
-    "grunt-verbosity": "~0.2.2"
+    "grunt-verbosity": "~0.2.2",
+    "mocha": "~1.13.0",
+    "grunt-mocha-test": "~0.7.0",
+    "expect.js": "~0.2.0",
+    "LiveScript": "~1.2.0"
   },
   "main": "lib/index.js",
   "scripts": {

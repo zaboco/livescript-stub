@@ -1,32 +1,19 @@
 module.exports = function(grunt) {
-  grunt.loadNpmTasks("grunt-vows");
+  grunt.loadNpmTasks("grunt-mocha-test");
   grunt.loadNpmTasks("grunt-contrib-watch");
   grunt.loadNpmTasks("grunt-contrib-clean");
-  grunt.loadNpmTasks("grunt-contrib-copy");
   grunt.loadNpmTasks("grunt-livescript");
   grunt.loadNpmTasks("grunt-lineending");
   grunt.loadNpmTasks("grunt-verbosity");
 
   grunt.initConfig({
     clean: {
-      lib: 'lib/',
-      tmp: ['src/*.js', 'spec/*.js']
-    },
-    copy: {
-      lib: {
-        files: [{ expand: true, cwd: 'src/', src: ['*.js'], dest: 'lib/'}]
-      }
+      lib: 'lib/'
     },
     livescript: {
-      options: {
-        bare: true,
-        prelude: true
-      },
+      options: { bare: true },
       src: {
-        files: [{ expand: true, src: ['src/*.ls'], dest: '.', ext: '.js'}]
-      },
-      spec: {
-        files: [{expand: true, src: ['spec/*-spec.ls'], dest: '.', ext: '.js'}]
+        files: [{ expand: true, cwd: 'src', src: ['*.ls'], dest: 'lib', ext: '.js'}]
       }
     },
     watch: {
@@ -34,13 +21,13 @@ module.exports = function(grunt) {
         files: ["spec/*-spec.ls", "src/*.ls"]
       }
     },
-    vows: {
+    mochaTest: {
       options: {
         reporter: "spec",
-        executable: "vows"
+        require: "livescript"
       },
-      all: {
-        src: "spec/*.js"
+      test: {
+        src: "spec/*.ls"
       }
     },
     lineending: {
@@ -66,8 +53,8 @@ module.exports = function(grunt) {
     specPath = filepath.replace(/src([\/\\].*)\.ls/, 'spec$1-spec.ls');
     grunt.log.ok('________________________________________');
     grunt.util.spawn({
-      cmd: 'lsc',
-      args: [specPath],
+      cmd: 'mocha',
+      args: ['--compilers', 'ls:LiveScript', '-R', 'min', specPath],
       opts: {stdio: 'inherit'}
     }, function done() {
       grunt.log.ok('========================================');
@@ -75,8 +62,7 @@ module.exports = function(grunt) {
   });
 
   grunt.task.registerTask('build', ['verbosity', 'lineending', 'livescript']);
-  grunt.task.registerTask('dist', ['clean:lib', 'test', 'livescript:src', 'copy:lib', 'clean:tmp']);
-  grunt.task.registerTask('test', ['clean:tmp', 'build', 'vows', 'clean:tmp']);
-  grunt.task.registerTask('w', ['clean:tmp', 'watch']);
+  grunt.task.registerTask('dist', ['clean:lib', 'test', 'build']);
+  grunt.task.registerTask('test', ['mochaTest']);
   grunt.task.registerTask('default', ['dist']);
 }

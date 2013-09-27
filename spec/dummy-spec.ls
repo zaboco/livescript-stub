@@ -1,14 +1,10 @@
 require! {
   '../src/dummy'
-  'vows/lib/vows/reporters/spec'
-  \vows
-  \assert
+  ex: \expect.js
 }
 
-vows.describe \suite
-  .add-batch {
-    \dummy-method :
-      topic: dummy.dummy-method
-      'returns true': -> assert.ok it
-  }
-  .export module, reporter: spec
+that = it
+
+describe \dummy ->
+  describe \dummy-method ->
+    that 'returns true' -> ex(dummy.dummy-method!).to.be true
