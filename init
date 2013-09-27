@@ -19,7 +19,7 @@ files=(
 )
 
 echo "creating $DEST"
-rm -rf $DEST
+rm -rdf $DEST
 mkdir -p $DEST
 
 echo "copying folder to $DEST"
