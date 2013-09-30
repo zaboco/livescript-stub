@@ -1,10 +1,10 @@
 require! {
   '../src/dummy'
-  ex: \expect.js
+  expect: \expect.js
 }
 
 that = it
 
 describe \dummy ->
   describe \dummy-method ->
-    that 'returns true' -> ex(dummy.dummy-method!).to.be true
+    that 'returns true' -> expect dummy.dummy-method! .to.be true
