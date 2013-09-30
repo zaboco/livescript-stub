@@ -30,7 +30,26 @@ cp *.sublime-project $DEST/$NAME.sublime-project
 cd $DEST
 sed -i "s/livescript-stub/$NAME/g" *.json *.md
 
+mv src/dummy.ls src/$NAME.ls
+mv spec/dummy-spec.ls spec/$NAME-spec.ls
+sed -i "s/dummy/$NAME/g" src/* spec/*
+
+npm_modules=(
+  prelude-ls
+  grunt
+  grunt-contrib-watch
+  grunt-livescript
+  grunt-contrib-clean
+  grunt-lineending
+  grunt-verbosity
+  mocha
+  grunt-mocha-test
+  expect.js
+)
+
 echo "installing module"
+npm update -g "${npm_modules[@]}"
+npm ln "${npm_modules[@]}"
 npm install
 
 echo done
