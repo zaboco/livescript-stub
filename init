@@ -42,9 +42,11 @@ npm_modules=(
   grunt-contrib-clean
   grunt-lineending
   grunt-verbosity
-  mocha
   grunt-mocha-test
-  expect.js
+  mocha
+  chai
+  sinon
+  sinon-chai
 )
 
 echo "installing module"
