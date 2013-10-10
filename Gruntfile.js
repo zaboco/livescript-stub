@@ -24,10 +24,13 @@ module.exports = function(grunt) {
     },
     mochaTest: {
       options: {
-        reporter: "spec",
         require: lsc
       },
       test: {
+        src: "spec/*.ls"
+      },
+      spec: {
+        options: {reporter: "spec"},
         src: "spec/*.ls"
       }
     },
