@@ -67,6 +67,7 @@ module.exports = function(grunt) {
 
   grunt.task.registerTask('build', ['verbosity', 'lineending', 'livescript']);
   grunt.task.registerTask('dist', ['clean:lib', 'test', 'build']);
-  grunt.task.registerTask('test', ['mochaTest']);
+  grunt.task.registerTask('test', ['mochaTest:test']);
+  grunt.task.registerTask('spec', ['mochaTest:spec']);
   grunt.task.registerTask('default', ['dist']);
 }
