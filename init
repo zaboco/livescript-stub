@@ -6,34 +6,6 @@ then
   exit 1
 fi
 
-DEST=${1%/}
-
-NAME="${DEST#*/}"
-
-files=(
-  src/ spec/
-  .gitignore .npmignore .travis.yml
-  Gruntfile.js
-  package.json
-  README.md
-)
-
-echo "creating $DEST"
-rm -rdf $DEST
-mkdir -p $DEST
-
-echo "copying folder to $DEST"
-cp -r "${files[@]}" $DEST
-
-echo "creating sublime project: $DEST/$NAME.sublime-project"
-cp *.sublime-project $DEST/$NAME.sublime-project
-cd $DEST
-sed -i "s/livescript-stub/$NAME/g" *.json *.md
-
-mv src/dummy.ls src/$NAME.ls
-mv spec/dummy-spec.ls spec/$NAME-spec.ls
-sed -i "s/dummy/$NAME/g" src/* spec/*
-
 npm_modules=(
   prelude-ls
   grunt
@@ -49,9 +21,52 @@ npm_modules=(
   sinon-chai
 )
 
+if [ $1 == "global" ]; then
+  echo 'installing globally all packages'
+  npm install -g "${npm_modules[@]}"
+  exit 0
+elif [ $1 == "link" ]; then
+  echo 'linking this to all packages'
+  npm ln "${npm_modules[@]}"
+  exit 0
+fi
+
+DEST=${1%/}
+
+NAME="${DEST#*/}"
+
+files=(
+  src/ spec/
+  .gitignore .npmignore .travis.yml
+  Gruntfile.js
+  package.json
+  README.md
+)
+
+echo "creating $DEST"
+if [ -d "$DEST" ]; then
+  echo "removing old dir"
+  cd $DEST
+  npm unlink "${npm_modules[@]}" &> /dev/null
+  cd -
+  rm -rf $DEST
+fi
+mkdir -p $DEST
+
+echo "copying folder to $DEST"
+cp -r "${files[@]}" $DEST
+
+echo "creating sublime project: $DEST/$NAME.sublime-project"
+cp *.sublime-project $DEST/$NAME.sublime-project
+cd $DEST
+sed -i "s/livescript-stub/$NAME/g" *.json *.md
+
+mv src/dummy.ls src/$NAME.ls
+mv spec/dummy-spec.ls spec/$NAME-spec.ls
+sed -i "s/dummy/$NAME/g" src/* spec/*
+
 echo "installing module"
 npm update -g "${npm_modules[@]}"
 npm ln "${npm_modules[@]}"
-npm install
 
 echo done
