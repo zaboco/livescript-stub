@@ -41,6 +41,7 @@ files=(
   Gruntfile.js
   package.json
   README.md
+  LICENSE
 )
 
 echo "creating $DEST"
